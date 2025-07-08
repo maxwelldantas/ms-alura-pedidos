@@ -6,6 +6,7 @@ import com.github.maxwelldantas.pedidos.service.PedidoService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,6 +37,11 @@ public class PedidoController {
 		PedidoDto dto = service.obterPorId(id);
 
 		return ResponseEntity.ok(dto);
+	}
+
+	@GetMapping("/porta")
+	public String retornaPorta(@Value("${local.server.port}") String porta) {
+		return String.format("Requisição respondida pela instância executando na porta %s", porta);
 	}
 
 	@PostMapping()
